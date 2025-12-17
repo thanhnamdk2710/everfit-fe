@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
+
 import {
   Metric,
   CreateMetricRequest,
@@ -49,31 +50,11 @@ class MetricsService {
     return response.data;
   }
 
-  async getMetric(id: string): Promise<Metric> {
-    const response = await this.client.get<ApiResponse<Metric>>(
-      `/api/metrics/${id}`
-    );
-    return response.data.data!;
-  }
-
-  async deleteMetric(id: string): Promise<void> {
-    await this.client.delete(`/api/metrics/${id}`);
-  }
-
   async getChartData(params: ChartDataParams): Promise<ChartDataResponse> {
     const response = await this.client.get<ChartDataResponse>(
       "/api/metrics/chart",
       { params }
     );
-    return response.data;
-  }
-
-  async healthCheck(): Promise<{
-    status: string;
-    timestamp: string;
-    uptime: number;
-  }> {
-    const response = await this.client.get("/health");
     return response.data;
   }
 }

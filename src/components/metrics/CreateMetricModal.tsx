@@ -55,11 +55,7 @@ export default function CreateMetricModal({
 
   return (
     <Modal
-      title={
-        <span style={{ fontSize: "18px", fontWeight: 600 }}>
-          Add New Metric
-        </span>
-      }
+      title="Add New Metric"
       open={open}
       onCancel={handleCancel}
       onOk={() => form.submit()}

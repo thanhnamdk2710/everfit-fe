@@ -1,10 +1,8 @@
-// Metric Types
 export type MetricType = "distance" | "temperature";
 export type DistanceUnit = "meter" | "centimeter" | "inch" | "feet" | "yard";
 export type TemperatureUnit = "kelvin" | "celsius" | "fahrenheit";
 export type ChartPeriod = "1month" | "2month";
 
-// Metric Data
 export interface Metric {
   id: string;
   userId: string;
@@ -17,7 +15,6 @@ export interface Metric {
   createdAt: string;
 }
 
-// Request/Response Types
 export interface CreateMetricRequest {
   userId: string;
   type: MetricType;
@@ -73,7 +70,6 @@ export interface ApiResponse<T> {
   error?: { code: string; message: string };
 }
 
-// Unit Configuration
 export interface UnitOption {
   value: string;
   label: string;

@@ -3,6 +3,7 @@
 import React from "react";
 import { Card, Select, Typography, Spin, Empty } from "antd";
 import dynamic from "next/dynamic";
+import dayjs from "dayjs";
 
 import { useChartData } from "../../hooks/useMetrics";
 import { useAppStore } from "../../lib/store";
@@ -14,7 +15,6 @@ import {
   getUnitSymbol,
 } from "../../types";
 
-// Dynamic import for chart to avoid SSR issues
 const Line = dynamic(
   () => import("@ant-design/charts").then((mod) => mod.Line),
   {
@@ -27,12 +27,12 @@ const Line = dynamic(
 
 const { Title, Text } = Typography;
 
-interface MetricChartProps {
+interface LineChartProps {
   type: MetricType;
   title?: string;
 }
 
-export default function MetricChart({ type, title }: MetricChartProps) {
+export default function LineChart({ type, title }: LineChartProps) {
   const { userId, chartPeriod, setChartPeriod } = useAppStore();
   const [selectedUnit, setSelectedUnit] = React.useState<string>(
     type === "distance" ? "meter" : "kelvin"
@@ -60,26 +60,6 @@ export default function MetricChart({ type, title }: MetricChartProps) {
         animation: "wave-in",
         duration: 1000,
       },
-    },
-    xAxis: {
-      label: {
-        formatter: (text: string) => {
-          const date = new Date(text);
-          return `${date.getMonth() + 1}/${date.getDate()}`;
-        },
-      },
-    },
-    yAxis: {
-      label: {
-        formatter: (value: string) =>
-          `${value} ${getUnitSymbol(type, selectedUnit)}`,
-      },
-    },
-    tooltip: {
-      formatter: (datum: any) => ({
-        name: type === "distance" ? "Distance" : "Temperature",
-        value: `${datum.value.toFixed(2)} ${getUnitSymbol(type, selectedUnit)}`,
-      }),
     },
     point: {
       size: 4,
@@ -123,7 +103,6 @@ export default function MetricChart({ type, title }: MetricChartProps) {
 
   return (
     <Card className="chart-container">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
           <Title level={5} className="mb-1">
@@ -132,13 +111,13 @@ export default function MetricChart({ type, title }: MetricChartProps) {
           </Title>
           {data && (
             <Text type="secondary" className="text-sm">
-              {data.dataPoints} data points • {data.startDate} to {data.endDate}
+              {dayjs(data.startDate).format("YYYY-MM-DD")} to{" "}
+              {dayjs(data.endDate).format("YYYY-MM-DD")}
             </Text>
           )}
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {/* Period Selector */}
           <Select
             value={chartPeriod}
             onChange={(value) => setChartPeriod(value as ChartPeriod)}
@@ -148,7 +127,6 @@ export default function MetricChart({ type, title }: MetricChartProps) {
             <Select.Option value="2month">2 Months</Select.Option>
           </Select>
 
-          {/* Unit Selector */}
           <Select
             value={selectedUnit}
             onChange={(value) => setSelectedUnit(value)}
@@ -163,7 +141,6 @@ export default function MetricChart({ type, title }: MetricChartProps) {
         </div>
       </div>
 
-      {/* Chart */}
       <div className="relative">
         {renderChart()}
         {isFetching && hasData && (
