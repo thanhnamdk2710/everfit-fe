@@ -32,22 +32,15 @@ Built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Ant Design**.
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── dashboard/          # Dashboard page
-│   ├── metrics/            # Metrics pages
-│   │   ├── page.tsx        # Metrics list
-│   │   └── new/            # Add new metric
+├── app/
 │   ├── layout.tsx          # Root layout
-│   ├── page.tsx            # Home (redirects)
+│   ├── page.tsx            # Home
 │   └── providers.tsx       # React Query + Ant Design
 │
 ├── components/
-│   ├── layout/
-│   │   └── MainLayout.tsx  # App shell with sidebar
 │   ├── metrics/
 │   │   ├── MetricForm.tsx  # Create metric form
-│   │   ├── MetricList.tsx  # Metrics table with filters
-│   │   └── StatsCards.tsx  # Dashboard stats
+│   │   └── MetricList.tsx  # Metrics table with filters
 │   └── charts/
 │       └── MetricChart.tsx # Line/Area chart component
 │
@@ -101,31 +94,6 @@ npm run dev
 | `npm start`          | Start production server  |
 | `npm run lint`       | Run ESLint               |
 | `npm run type-check` | TypeScript type checking |
-
-## Pages
-
-### Dashboard (`/dashboard`)
-
-- Welcome banner with API status
-- Stats cards showing totals and trends
-- Distance and temperature trend charts
-- Quick action cards
-
-### Metrics List (`/metrics`)
-
-- Filterable metrics table
-- Filter by type, unit, date range
-- Unit conversion on-the-fly
-- Pagination
-- Delete metrics
-
-### Add Metric (`/metrics/new`)
-
-- Form to create new metrics
-- Type selection (distance/temperature)
-- Unit selection based on type
-- Date picker
-- Reference cards for available units
 
 ## Components
 
