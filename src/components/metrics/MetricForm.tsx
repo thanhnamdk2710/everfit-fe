@@ -14,15 +14,12 @@ import {
 
 const { Option } = Select;
 
-interface CreateMetricModalProps {
+interface MetricFormProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function CreateMetricModal({
-  open,
-  onClose,
-}: CreateMetricModalProps) {
+export default function MetricForm({ open, onClose }: MetricFormProps) {
   const [form] = Form.useForm();
   const { userId } = useAppStore();
   const createMetric = useCreateMetric();

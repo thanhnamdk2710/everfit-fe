@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { Typography, Card, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-import CreateMetricModal from "../components/metrics/CreateMetricModal";
 import MetricList from "../components/metrics/MetricList";
 import MetricCharts from "../components/charts/MetricCharts";
+import MetricForm from "../components/metrics/MetricForm";
 
 const { Title, Text } = Typography;
 
@@ -45,7 +45,7 @@ export default function DashboardPage() {
         <MetricCharts />
       </div>
 
-      <CreateMetricModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <MetricForm open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }

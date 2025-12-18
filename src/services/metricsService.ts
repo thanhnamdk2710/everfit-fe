@@ -36,7 +36,7 @@ class MetricsService {
 
   async createMetric(data: CreateMetricRequest): Promise<Metric> {
     const response = await this.client.post<ApiResponse<Metric>>(
-      "/api/metrics",
+      "/v1/api/metrics",
       data
     );
     return response.data.data!;
@@ -44,7 +44,7 @@ class MetricsService {
 
   async listMetrics(params: ListMetricsParams): Promise<ListMetricsResponse> {
     const response = await this.client.get<ListMetricsResponse>(
-      "/api/metrics",
+      "/v1/api/metrics",
       { params }
     );
     return response.data;
@@ -52,7 +52,7 @@ class MetricsService {
 
   async getChartData(params: ChartDataParams): Promise<ChartDataResponse> {
     const response = await this.client.get<ChartDataResponse>(
-      "/api/metrics/chart",
+      "/v1/api/metrics/chart",
       { params }
     );
     return response.data;
